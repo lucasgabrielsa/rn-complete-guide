@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View, Button, TextInput } from "react-native";
 
 const GoalForm = (props) => {
-  console.log("props", props);
   return (
     <View style={styles.mainView}>
       <TextInput
