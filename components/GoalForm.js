@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
+import Separator from "./Separator";
 
 const GoalForm = (props) => {
   return (
-    <Modal visible={props.showModal}>
+    <Modal visible={props.showModal} animationType="slide">
       <View style={styles.mainView}>
         <TextInput
           placeholder="Enter Course Goal"
@@ -11,8 +12,9 @@ const GoalForm = (props) => {
           onChangeText={props.goalInputHandler}
           value={props.enteredGoal}
         />
-        <Button title="+" onPress={props.addGoalHandler} />
-        <Button title="0" onPress={props.cleanListHandler} />
+        <Button title="Cancel" color="red" onPress={props.closeModal} />
+        <Separator />
+        <Button title="ADD GOAL" onPress={props.addGoalHandler} />
       </View>
     </Modal>
   );
@@ -20,8 +22,8 @@ const GoalForm = (props) => {
 
 const styles = StyleSheet.create({
   mainView: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
   inputForm: {
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: "80%",
+    marginBottom: 10,
   },
 });
 

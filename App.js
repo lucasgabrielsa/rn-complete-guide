@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, FlatList, Button } from "react-native";
+import { View, FlatList, Button, StyleSheet } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalForm from "./components/GoalForm";
+import Separator from "./components/Separator";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -13,6 +14,7 @@ export default function App() {
   };
 
   const addGoalHandler = () => {
+    setEnteredGoal("");
     setCourseGoals((currentGoals) => [
       ...currentGoals,
       {
@@ -35,14 +37,20 @@ export default function App() {
   };
 
   return (
-    <View style={{ padding: 30 }}>
+    <View style={styles.mainView}>
       <Button title="Add a new goal" onPress={() => setShowModal(true)} />
+      <Separator />
+      <Button
+        title="Remove All"
+        onPress={cleanListHandler}
+        disabled={courseGoals.length === 0}
+      />
       <GoalForm
         showModal={showModal}
         goalInputHandler={goalInputHandler}
         addGoalHandler={addGoalHandler}
-        cleanListHandler={cleanListHandler}
         enteredGoal={enteredGoal}
+        closeModal={() => setShowModal(false)}
       />
       <FlatList
         keyExtractor={(item, index) => item.id}
@@ -54,3 +62,10 @@ export default function App() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  mainView: {
+    padding: 30,
+    flexDirection: "column",
+  },
+});
