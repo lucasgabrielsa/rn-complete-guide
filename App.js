@@ -8,7 +8,8 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import SimpleFlexExample from "./components/SimpleFlexExample";
+import GoalItem from "./components/GoalItem";
+import GoalForm from "./components/GoalForm";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -34,46 +35,17 @@ export default function App() {
 
   return (
     <View style={{ padding: 30 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <TextInput
-          placeholder="Course Goal"
-          style={{
-            borderColor: "gray",
-            borderWidth: 1,
-            padding: 10,
-            width: "80%",
-          }}
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-        />
-        <Button title="+" onPress={addGoalHandler} />
-        <Button title="0" onPress={cleanListHandler} />
-      </View>
+      <GoalForm
+        goalInputHandler={goalInputHandler}
+        addGoalHandler={addGoalHandler}
+        cleanListHandler={cleanListHandler}
+        enteredGoal={enteredGoal}
+      />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={courseGoals}
-        renderItem={(itemData) => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={(itemData) => <GoalItem value={itemData.item.value} />}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  listItem: {
-    padding: 10,
-    marginVertical: 5,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
-  },
-});
