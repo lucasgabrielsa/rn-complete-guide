@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
-import Separator from "./Separator";
 
 const GoalForm = (props) => {
   return (
@@ -12,9 +11,10 @@ const GoalForm = (props) => {
           onChangeText={props.goalInputHandler}
           value={props.enteredGoal}
         />
-        <Button title="Cancel" color="red" onPress={props.closeModal} />
-        <Separator />
-        <Button title="ADD GOAL" onPress={props.addGoalHandler} />
+        <View style={styles.buttonContainer}>
+          <Button title="Cancel" color="red" onPress={props.closeModal} />
+          <Button title="ADD GOAL" onPress={props.addGoalHandler} />
+        </View>
       </View>
     </Modal>
   );
@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "80%",
     marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "80%",
   },
 });
 
