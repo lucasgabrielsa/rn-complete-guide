@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Button } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalForm from "./components/GoalForm";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const goalInputHandler = (enteredText) => {
     setEnteredGoal(enteredText);
@@ -19,10 +20,12 @@ export default function App() {
         value: enteredGoal,
       },
     ]);
+    setShowModal(false);
   };
 
   const cleanListHandler = () => {
     setCourseGoals([]);
+    setShowModal(false);
   };
 
   const handleDelete = (item) => {
@@ -33,7 +36,9 @@ export default function App() {
 
   return (
     <View style={{ padding: 30 }}>
+      <Button title="Add a new goal" onPress={() => setShowModal(true)} />
       <GoalForm
+        showModal={showModal}
         goalInputHandler={goalInputHandler}
         addGoalHandler={addGoalHandler}
         cleanListHandler={cleanListHandler}
