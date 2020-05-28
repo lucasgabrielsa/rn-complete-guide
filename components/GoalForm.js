@@ -12,8 +12,16 @@ const GoalForm = (props) => {
           value={props.enteredGoal}
         />
         <View style={styles.buttonContainer}>
-          <Button title="Cancel" color="red" onPress={props.closeModal} />
-          <Button title="ADD GOAL" onPress={props.addGoalHandler} />
+          <View style={styles.buttonStyle}>
+            <Button title="Cancel" color="red" onPress={props.closeModal} />
+          </View>
+          <View style={styles.buttonStyle}>
+            <Button
+              title="ADD GOAL"
+              onPress={props.addGoalHandler}
+              disabled={props.enteredGoal.length <= 0}
+            />
+          </View>
         </View>
       </View>
     </Modal>
@@ -37,6 +45,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "80%",
+  },
+  buttonStyle: {
+    width: "40%",
   },
 });
 

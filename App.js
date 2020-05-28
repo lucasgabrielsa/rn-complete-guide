@@ -23,6 +23,7 @@ export default function App() {
       },
     ]);
     setShowModal(false);
+    console.log("working");
   };
 
   const cleanListHandler = () => {
@@ -41,7 +42,7 @@ export default function App() {
       <Button title="Add a new goal" onPress={() => setShowModal(true)} />
       <Separator />
       <Button
-        title="Remove All"
+        title="Remove All Goals"
         onPress={cleanListHandler}
         disabled={courseGoals.length === 0}
       />
